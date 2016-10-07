@@ -22,7 +22,7 @@ public class ProdutoValidation implements Validator{
 		Produto produto = (Produto) target;
 	
 		if(produto.getPaginas() <= 0){
-			errors.rejectValue("paginas", "fild.required");
+			errors.rejectValue("paginas", "field.required");
 		}
 	}
 

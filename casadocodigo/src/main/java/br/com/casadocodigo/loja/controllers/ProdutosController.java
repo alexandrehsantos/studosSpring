@@ -2,7 +2,6 @@ package br.com.casadocodigo.loja.controllers;
 
 import java.util.List;
 
-import javax.naming.Binding;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +42,8 @@ public class ProdutosController {
 	}
 	
 	@RequestMapping(value="/produtos", method=RequestMethod.POST)
-	public ModelAndView gravar(@Valid Produto produto, BindingResult bindingResult, RedirectAttributes redirectAttributes){
-		if(bindingResult.hasErrors()){
+	public ModelAndView gravar(@Valid Produto produto, BindingResult result, RedirectAttributes redirectAttributes){
+		if(result.hasErrors()){
 			ModelAndView modelAndView = new ModelAndView("produtos/form");
 			modelAndView.addObject("tipos", TipoPreco.values());
 			return modelAndView;

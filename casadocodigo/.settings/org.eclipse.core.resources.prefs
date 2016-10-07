@@ -1,3 +1,7 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
+encoding//src/main/webapp/WEB-INF/message.properties=UTF-8
+encoding//src/main/webapp/WEB-INF/message_en.properties=UTF-8
+encoding//src/main/webapp/WEB-INF/message_en_GB.properties=UTF-8
+encoding//src/main/webapp/WEB-INF/message_en_US.properties=UTF-8
 encoding//src/test/java=UTF-8
