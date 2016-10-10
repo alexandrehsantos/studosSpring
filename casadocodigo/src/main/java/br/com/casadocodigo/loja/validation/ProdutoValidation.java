@@ -16,7 +16,7 @@ public class ProdutoValidation implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 
-		ValidationUtils.rejectIfEmpty(errors, "titulo", "field.required" );
+		ValidationUtils.rejectIfEmpty(errors, "titulo", "field.required.produto" );
 		ValidationUtils.rejectIfEmpty(errors, "descricao", "field.required");
 		
 		Produto produto = (Produto) target;

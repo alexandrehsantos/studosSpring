@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,25 +17,38 @@
 		commandName="produto">
 		<%-- 	<form action="/casadocodigo/produtos" method="post"> --%>
 		<div>
-			<label>Título</label> <input type="text" name="titulo" /> 
-			<form:errors path="titulo"/>
+			<label>Título</label>
+			<form:input path="titulo" />
+			<!-- 			<input type="text" name="titulo" />  -->
+			<form:errors path="titulo" />
 		</div>
 		<div>
-			<label>Descrição</label> <fomr: errors path="descricao"/>
-			 <form:errors path="descricao"/>
-			<textarea rows="10" cols="20" name="descricao"></textarea>
+			<label>Descrição</label>
+			<form:textarea path="descricao" rows="10" cols="20" />
+			<form:errors path="descricao" />
+			<!-- 			<textarea rows="10" cols="20" name="descricao"></textarea> -->
 		</div>
 		<div>
-			<label>Páginas</label> <input type="text" name="paginas"/> 
+			<label>Páginas</label>
+			<form:input type="text" path="paginas" />
+			<!-- 			<input type="text" name="paginas"/>  -->
 			<form:errors path="paginas" />
+		</div>
+
+		<div>
+			<label>Data de Lançamento</label>
+			<form:input path="dataLancamento" />
+			<!-- 			<input name="dataLancamento" type="text"> -->
+			<form:errors path="dataLancamento" />
 		</div>
 
 
 		<c:forEach items="${tipos}" var="tipoPreco" varStatus="status">
 			<div>
-				<label>${tipoPreco}</label> <input type="text"
-					name="precos[${status.index}].valor" /> <input type="hidden"
-					name="precos[${status.index}].tipo" value="${tipoPreco}" />
+				<label>${tipoPreco}</label>
+				<form:input path="precos[${status.index}].valor" />
+				<form:input type="hidden" path="precos[${status.index}].tipo"
+					value="${tipoPreco}" />
 			</div>
 		</c:forEach>
 
