@@ -14,7 +14,7 @@
 </head>
 <body>
 	<form:form action="${s:mvcUrl('PC#gravar').build()}" method="post"
-		commandName="produto">
+		commandName="produto" enctype="multipart/form-data">
 		<%-- 	<form action="/casadocodigo/produtos" method="post"> --%>
 		<div>
 			<label>Título</label>
@@ -51,6 +51,11 @@
 					value="${tipoPreco}" />
 			</div>
 		</c:forEach>
+		
+		<div>
+			<label>Sumário</label>
+			<input name="sumario" type="file">
+		</div>
 
 
 		<button type="submit">Cadastrar</button>
