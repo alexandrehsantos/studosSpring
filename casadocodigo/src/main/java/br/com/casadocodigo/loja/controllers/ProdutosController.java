@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +28,7 @@ import br.com.casadocodigo.loja.validation.ProdutoValidation;
 public class ProdutosController {
 	
 	@Autowired
-	private ProdutoDAO produtoDAO;
+	private ProdutoDAO dao;
 	
 	@Autowired
 	private FileSaver filesaver;
@@ -35,6 +36,15 @@ public class ProdutosController {
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder){
 		webDataBinder.addValidators(new ProdutoValidation());
+	}
+	
+	
+	@RequestMapping("/detalhe/{id}")
+	public ModelAndView detalhe(@PathVariable("id") Integer id){
+		ModelAndView modelAndView = new ModelAndView("produtos/detalhe");
+		Produto produto = dao.find(id);
+		modelAndView.addObject("produto", produto);
+		return modelAndView;
 	}
 	
 	@RequestMapping("/produtos/form")
@@ -63,7 +73,7 @@ public class ProdutosController {
 		String path = filesaver.write("arquivos-sumarios", sumario);
 		produto.setSumarioPath(path);
 		
-		produtoDAO.gravar(produto);
+		dao.gravar(produto);
 
 		redirectAttributes.addFlashAttribute("sucesso","Produto cadastrado com sucesso!"); 
 		return new ModelAndView("redirect:produtos");
@@ -71,7 +81,7 @@ public class ProdutosController {
 	
 	@RequestMapping(value="/produtos", method=RequestMethod.GET)
 	public ModelAndView listar(){
-		List<Produto> produtos = produtoDAO.listar();
+		List<Produto> produtos = dao.listar();
 		ModelAndView modelAndView = new ModelAndView("/produtos/lista");
 		modelAndView.addObject("produtos", produtos); 
 		return modelAndView;
