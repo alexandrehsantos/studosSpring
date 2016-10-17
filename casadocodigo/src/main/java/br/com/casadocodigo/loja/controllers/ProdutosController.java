@@ -37,15 +37,7 @@ public class ProdutosController {
 	public void initBinder(WebDataBinder webDataBinder){
 		webDataBinder.addValidators(new ProdutoValidation());
 	}
-	
-	
-	@RequestMapping("/detalhe/{id}")
-	public ModelAndView detalhe(@PathVariable("id") Integer id){
-		ModelAndView modelAndView = new ModelAndView("produtos/detalhe");
-		Produto produto = dao.find(id);
-		modelAndView.addObject("produto", produto);
-		return modelAndView;
-	}
+		
 	
 	@RequestMapping("/produtos/form")
 	public ModelAndView form(Produto produto){
@@ -87,4 +79,22 @@ public class ProdutosController {
 		return modelAndView;
 		}
 
+
+	@RequestMapping("/produtos/detalhe/{id}")
+	public ModelAndView detalhe(@PathVariable("id") Integer id){
+		ModelAndView modelAndView = new ModelAndView("produtos/detalhe");
+		Produto produto = dao.find(id);
+		modelAndView.addObject("produto", produto);
+		return modelAndView;
+	}
+	
+	@RequestMapping("/produtos/testeDao/{id}")
+	public ModelAndView testeDAO(Integer id){
+		ModelAndView modelAndView = new ModelAndView("produtos/testeDao");
+		Produto produto = dao.find(id);
+		modelAndView.addObject("produto", produto);
+		return modelAndView;
+	}
+	
+	
 }
