@@ -9,7 +9,7 @@
 </head>
 <body>
 	<H1>Testando Produto Dao</H1>
-	
+	<h2>${contextPath}</h2>
 	<article id="${produto.id }"> 
 	<h1>${produto.titulo }</h1>
 </body>

@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:url value="/" var="contextPath" />
+<c:url value="/produtos/" var="contextPath" />
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport"
@@ -49,7 +49,12 @@
 			<div id="header-content">
 				<nav id="main-nav">
 					<ul class="clearfix">
-						<li><a href="/carrinho" rel="nofollow">Seu Carrinho</a></li>
+						<li>
+						<a href="/carrinho" rel="nofollow">Seu Carrinho (${carrinhoCompras.quantidade })
+						
+						</a>
+						</li>
+						
 						<li><a href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre Nós</a></li>
 						<li><a href="/pages/perguntas-frequentes" rel="nofollow">Perguntas Frequentes</a></li>
 					</ul>
@@ -92,9 +97,9 @@
 
 
 		<section class="buy-options clearfix">
-			<form action="/carrinho/add" method="post" class="container">
+			<form action='<c:url value="/carrinho/add"/>'method="post" class="container">
 				<ul id="variants" class="clearfix">
-				<input type="hidden" value="{produto.id}" name="produtoId"/>
+				<input type="hidden" value="${produto.id}" name="produtoId"/>
 					<c:forEach items="${produto.precos }" var="preco">
 					<li class="buy-option">
 						<input type="radio" name="tipo" class="variant-radio" 
