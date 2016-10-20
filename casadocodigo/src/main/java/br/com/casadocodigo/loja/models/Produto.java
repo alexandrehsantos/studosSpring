@@ -1,5 +1,6 @@
 package br.com.casadocodigo.loja.models;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -19,9 +20,10 @@ public class Produto {
 	private String titulo;
 	private String descricao; 
 	private int paginas;
-	
 	private String sumarioPath;
-	
+
+	@ElementCollection
+	private List<Preco> precos;
 	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Calendar dataLancamento;
 
@@ -35,9 +37,6 @@ public class Produto {
 	public void setDataLancamento(Calendar dataLancamento) {
 		this.dataLancamento = dataLancamento;
 	}
-	@ElementCollection
-	private List<Preco> precos;
-	
 	public List<Preco> getPrecos() {
 		return precos;
 	}
@@ -117,7 +116,18 @@ public class Produto {
 			return false;
 		return true;
 	}
-	
+
+
+	public BigDecimal precoPara(TipoPreco tipoPreco) {
+		for (Preco preco : precos) {
+			if(preco.getTipo().equals(tipoPreco)){
+				return preco.getValor();
+			}
+		}
+		return null;
+	}
+
+
 	
 	
 	
