@@ -51,9 +51,7 @@
 				<nav id="main-nav">
 
 					<ul class="clearfix">
-						<li><a href="${s:mvcUrl('CCC#itens').build()}" rel="nofollow">Seu
-								carrinho (${carrinhoCompras.quantidade })</a></li>
-
+						<li><a href="${s:mvcUrl('CCC#itens').build()}" rel="nofollow">Carrinho ( ${carrinhoCompras.quantidade} )</a></li>
 						<li><a href="/pages/sobre-a-casa-do-codigo" rel="nofollow">Sobre
 								Nós</a></li>
 
@@ -106,7 +104,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="{carrinhoCompras.itens}" var="item">
+				<c:forEach items="${carrinhoCompras.item}" var="item">
 					<tr>
 						<td class="cart-img-col"><img
 							src="http://cdn.shopify.com/s/files/1/0155/7645/products/css-eficiente-featured_large.png?v=1435245145"
@@ -118,8 +116,9 @@
 							value="${carrinhoCompras.getQuantidade(item) }" /></td>
 						<td class="numeric-cell">${carrinhoCompras.getTotal(item) }</td>
 						<form action="" method="POST">
-							<input type="image" src="${contextPath }resources/imagens/excluir.png"
-								alt="Excluir" title="Excluir" />
+							<input type="image"
+								src="${contextPath }resources/imagens/excluir.png" alt="Excluir"
+								title="Excluir" />
 						</form>
 					</tr>
 
@@ -127,8 +126,13 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="3"><input type="submit" class="checkout"
-						name="checkout" value="Finalizar compra" /></td>
+					<td colspan="3">
+
+						<form action="${s:mvcUrl('PC#finalizar').build()}" method="get">
+							<input type="submit" class="checkout" name="checkout"
+									value="Finalizar compra" id="checkout"/>
+						</form>
+						</td>
 					<td class="quantity-input-cell"><input type="submit"
 						class="update-cart" disabled="disabled" name="update" value="" /></td>
 					<td class="numeric-cell">${carrinhoCompras.total }</td>
@@ -137,21 +141,7 @@
 			</tfoot>
 		</table>
 
-		<h2>Você já conhece os outros livros da Casa do Código?</h2>
-		<ul id="collection" class="related-books">
-			<li class="col-left"><a href="/products/livro-plsql"
-				class="block clearfix book-suggest"
-				data-book="PL/SQL: Domine a linguagem do banco de dados Oracle">
-					<img width="113px" height="160px"
-					src="http:////cdn.shopify.com/s/files/1/0155/7645/products/plsql-featured_compact.png?v=1434740236"
-					alt="PL/SQL: Domine a linguagem do banco de dados Oracle" />
-			</a></li>
-		</ul>
 
-		<h2>
-			<a href="http://www.casadocodigo.com.br">Veja todos os livros que
-				publicamos!</a>
-		</h2>
 	</section>
 
 
