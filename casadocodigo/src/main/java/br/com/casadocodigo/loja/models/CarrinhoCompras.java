@@ -21,13 +21,11 @@ public class CarrinhoCompras implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Map<CarrinhoItem, Integer> itens = new LinkedHashMap<CarrinhoItem, Integer>();
 	
-	
-	
 	public void add(CarrinhoItem item){
 		itens.put(item, getQuantidade(item)+1);
 	}
 	
-	private int getQuantidade(CarrinhoItem item){
+	public Integer getQuantidade(CarrinhoItem item){
 		if(!itens.containsKey(item)){
 			itens.put(item, 0);
 		}
@@ -63,5 +61,9 @@ public class CarrinhoCompras implements Serializable{
 			total = total.add(getTotal(item));
 		}
 		return total;
+	}
+	
+	public BigDecimal getPreco(){
+		return null;
 	}
 }

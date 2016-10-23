@@ -102,7 +102,7 @@
 				<input type="hidden" value="${produto.id}" name="produtoId"/>
 					<c:forEach items="${produto.precos }" var="preco">
 					<li class="buy-option">
-						<input type="radio" name="tipo" class="variant-radio" 
+						<input type="radio" name="tipoPreco" class="variant-radio" 
 						id="tipo" value="${preco.tipo}" checked="checked"> 
 					<label class="variant-label">
 						${preco.tipo}

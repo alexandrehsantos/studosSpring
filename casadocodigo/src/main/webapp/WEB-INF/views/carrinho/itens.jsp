@@ -127,7 +127,6 @@
 			<tfoot>
 				<tr>
 					<td colspan="3">
-
 						<form action="${s:mvcUrl('PC#finalizar').build()}" method="get">
 							<input type="submit" class="checkout" name="checkout"
 									value="Finalizar compra" id="checkout"/>
