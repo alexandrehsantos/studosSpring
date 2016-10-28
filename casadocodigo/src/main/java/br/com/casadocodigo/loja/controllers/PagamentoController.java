@@ -1,7 +1,10 @@
 package br.com.casadocodigo.loja.controllers;
 
+import java.util.concurrent.Callable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.HttpClientErrorException;
@@ -15,27 +18,35 @@ import br.com.casadocodigo.loja.models.DadosPagamento;
 @RequestMapping("/pagamento")
 @Controller
 public class PagamentoController {
-	
+
 	@Autowired
 	private CarrinhoCompras carrinho;
 	@Autowired
 	private RestTemplate restTamplate;
-	
-	@RequestMapping(value="/finalizar", method=RequestMethod.POST)
-	public ModelAndView finalizar(RedirectAttributes model){
 
-		try {
-			String uri = "http://book-payment.herokuapp.com/payment";
-			String response = restTamplate.postForObject(uri, new DadosPagamento(carrinho.getTotal()), String.class);
-			System.out.println(response);
-			model.addFlashAttribute("sucesso", response);
-			System.out.println(response);
-			return new ModelAndView("redirect:/produtos");
-			
-		} catch (HttpClientErrorException e) {
-			e.printStackTrace();
-			model.addFlashAttribute("falha", "Valor excede o permitido");
-			return new ModelAndView("redirect:/produtos");
-		}
+	@RequestMapping(value = "/finalizar", method = RequestMethod.POST)
+	public Callable<ModelAndView> finalizar(final RedirectAttributes model) {
+
+		return new Callable<ModelAndView>() {
+
+			public ModelAndView call() {
+				try {
+					String uri = "http://book-payment.herokuapp.com/payment";
+					String response = restTamplate.postForObject(uri,
+							new DadosPagamento(carrinho.getTotal()),
+							String.class);
+					System.out.println(response);
+					model.addFlashAttribute("sucesso", response);
+					return new ModelAndView("redirect:/produtos");
+				} catch (HttpClientErrorException e) {
+					e.printStackTrace();
+					model.addFlashAttribute("falha", "Valor excede o permitido");
+					return new ModelAndView("redirect:/produtos");
+				}
+			}
+
+		};
+
 	}
+
 }
