@@ -15,6 +15,7 @@
 	<h1>Lista de produtos cadastrados</h1>
 	<div>
 		${sucesso }
+	<p>
 	</div>
 	<table>
 		<tr>

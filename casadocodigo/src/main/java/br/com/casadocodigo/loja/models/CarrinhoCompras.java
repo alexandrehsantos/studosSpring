@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javassist.expr.NewArray;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -65,5 +67,11 @@ public class CarrinhoCompras implements Serializable{
 	
 	public BigDecimal getPreco(){
 		return null;
+	}
+	
+	public void remover(Integer produtoId, TipoPreco tipoPreco){
+		Produto produto = new Produto();
+		produto.setId(produtoId);
+		itens.remove(new CarrinhoItem(produto, tipoPreco));
 	}
 }
